@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Head>
+        <meta
+          name="google-site-verification"
+          content="v4QXUTaePrFPxXz3VDttAUMTIy56uic-mbeugFWMcx8"
+        />
+      </Head>
       <body className={inter.className}>
         <Header />
         <main className="p-5">{children}</main>
