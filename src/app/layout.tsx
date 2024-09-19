@@ -25,12 +25,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <meta
           name="google-site-verification"
           content="v4QXUTaePrFPxXz3VDttAUMTIy56uic-mbeugFWMcx8"
         />
-      </Head>
+      </head>
       <body className={inter.className}>
         <Header />
         <main className="p-5">{children}</main>
