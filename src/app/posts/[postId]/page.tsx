@@ -1,19 +1,11 @@
 import ClapButton from "@/components/ClapButton";
 import { delay } from "@/lib/utils";
-import { BlogPost, BlogPostsResponse } from "@/models/BlogPost";
+import { BlogPost } from "@/models/BlogPost";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { cache } from "react";
 
 interface BlogPostPageProps {
   params: { postId: string };
-}
-
-export async function generateStaticParams() {
-  const response = await fetch("https://dummyjson.com/posts");
-  const { posts }: BlogPostsResponse = await response.json();
-
-  return posts.map(({ id }) => id);
 }
 
 // Manually deduplicate requests if not using fetch
@@ -31,6 +23,13 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.body,
+    robots: {
+      index: true,
+      follow: true,
+    },
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${postId}`,
+    },
     // openGraph: {
     //   images: [
     //     {
@@ -51,7 +50,7 @@ export default async function BlogPostPage({
     notFound();
   }
 
-  await delay(1000);
+  // await delay(6000);
 
   return (
     <article className="max-w-prose m-auto space-y-5">
